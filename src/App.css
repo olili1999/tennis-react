@@ -5,3 +5,10 @@ body {
   color: black;
   background-color: #ebecf1;
 }
+h3 {
+  margin-left: 15px;
+  color: #1b1c25;
+}
+@font-face {
+  font-family: Rubik, sans-serif;
+}

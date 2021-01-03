@@ -11,6 +11,7 @@ function Players() {
       </Card>
       <Card> 
       </Card>
+      
     </div> 
     
      </div>);
