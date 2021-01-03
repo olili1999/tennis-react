@@ -1,6 +1,6 @@
 
 import logo from './logo.svg';
-import './App.css';
+import './App.modules.css';
 import Nav from "./Nav" 
 import Card from "./Card"
 import Tournaments from './pages/Tournaments'; 
@@ -12,7 +12,6 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from './pages/Home';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import './App.css';
 
 function App() {
   return (

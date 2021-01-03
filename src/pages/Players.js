@@ -1,7 +1,7 @@
 import React from 'react'; 
 
 import Card from "../Card";
-import "./Players.css"
+import "./Players.modules.css"
 function Players() { 
   return (<div>    <h3> Recommended Players Near You </h3> 
     <div class = "cardContainer"> 

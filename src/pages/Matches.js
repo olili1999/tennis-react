@@ -1,6 +1,6 @@
 import React from 'react'; 
 import MaterialTable from '../MaterialTable';
-import './Matches.css'; 
+import './Matches.modules.css'; 
 function Matches() { 
   return (<div class = "outer">
 

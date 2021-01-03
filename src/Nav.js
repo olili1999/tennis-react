@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Nav.css'
+import './Nav.modules.css'
 import { useHistory } from 'react-router-dom'; 
 import Tournaments from './pages/Tournaments'; 
 import Players from './pages/Players'; 
