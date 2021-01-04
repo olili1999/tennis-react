@@ -11,13 +11,13 @@ function CardComponent(){
               <img src = "./headshotross.jpg" class = "profile-pic"/> 
             </div> 
         </div>
-        <div class = "textbox" > 
+        <ul class = "textbox" > 
           <li> 🏅 TwF Rank: #1 </li>
           <li> 🏆 10 Wins, 0 Losses </li>
           <li> 📈 USTA Rating: 5.0 </li>
           <li> <img class = "utr" src = "./utr.png"/> UTR Rating: 10.0 </li>
           <li> 📍 10 Miles Away </li>
-        </div> 
+        </ul> 
         <div class = "button-div"> 
           <button class = "hvr-rectangle-out-btn"> 
             <a> CONTACT </a>

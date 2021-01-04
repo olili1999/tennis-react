@@ -3,7 +3,7 @@ import React from 'react';
 
 
 function SignUp() { 
-  return (<div>SignUp </div>);  
+  return (<div> <h3> SignUp </h3>  </div>);  
 }
 
 export default SignUp; 

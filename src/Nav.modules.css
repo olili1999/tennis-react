@@ -1,4 +1,4 @@
-#nav {
+.nav-bar {
   width: 100%;
   list-style: none;
   margin: 0;
@@ -8,19 +8,10 @@
   justify-content: space-between;
   background-color: #206a5d;
 }
-#logo {
+.logo-place {
   color: #ebecf1 !important;
   font-weight: 600 !important;
   font-size: 1.5em;
-}
-
-.highlight {
-  background: #16463d;
-  border-radius: 5px;
-}
-ul {
-  padding: 0;
-  margin: 0;
 }
 
 .utr {
@@ -28,17 +19,24 @@ ul {
   padding-right: 5px;
 }
 
-#nav li {
+.nav-bar li {
   display: flex;
   align-items: center;
 }
-#nav li a {
+.nav-bar li a {
   padding: 10px 15px;
   text-decoration: none;
   color: #ebecf1;
 }
 
+.left {
+  padding: 0;
+  margin: 0;
+}
+
 .right {
+  padding: 0;
+  margin: 0;
   display: flex;
 }
 

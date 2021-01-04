@@ -11,9 +11,9 @@ import {NavLink} from 'react-router-dom';
 function NavComponent(){ 
   return (
       <div class = "outer">
-          <div id="nav">
+          <div className="nav-bar">
             <ul className = "left"> 
-              <li><a href="" id= "logo">Tennis with Friends </a></li>
+              <li><a href="" className= "logo-place">Tennis with Friends </a></li>
             </ul> 
             <ul className = "right">
               <li className = "hvr-rectangle-out">

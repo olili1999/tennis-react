@@ -11,9 +11,6 @@
   color: #ebecf1;
 }
 
-img {
-  border-radius: 50%;
-}
 .header-text {
   color: #ebecf1;
   font-weight: 600;
@@ -34,6 +31,7 @@ img {
   margin-left: -25%;
   height: 100%;
   width: auto;
+  border-radius: 50%;
 }
 
 .first-line {
@@ -47,6 +45,7 @@ img {
 .textbox {
   margin: 0 2.5em;
   list-style: none;
+  padding: 0;
 }
 
 .textbox li {
