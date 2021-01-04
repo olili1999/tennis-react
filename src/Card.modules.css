@@ -53,7 +53,7 @@ img {
   padding: 10px;
 }
 
-button {
+.hvr-rectangle-out-btn {
   width: 100%;
   color: #ebecf1;
   font-weight: 600;
@@ -111,7 +111,7 @@ button:hover {
   cursor: pointer;
 }
 
-.button {
+.button-div {
   width: 100%;
   position: absolute;
   bottom: 0px;

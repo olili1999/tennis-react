@@ -18,7 +18,7 @@ function CardComponent(){
           <li> <img class = "utr" src = "./utr.png"/> UTR Rating: 10.0 </li>
           <li> 📍 10 Miles Away </li>
         </div> 
-        <div class = "button"> 
+        <div class = "button-div"> 
           <button class = "hvr-rectangle-out-btn"> 
             <a> CONTACT </a>
           </button>

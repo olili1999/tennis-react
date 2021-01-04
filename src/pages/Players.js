@@ -1,6 +1,6 @@
 import React from 'react'; 
-
 import Card from "../Card";
+import MaterialTable from "../MaterialTable";
 import "./Players.modules.css"
 function Players() { 
   return (<div>    <h3> Recommended Players Near You </h3> 
@@ -11,10 +11,13 @@ function Players() {
       </Card>
       <Card> 
       </Card>
-      
     </div> 
-    
-     </div>);
+    <h3> Player Database Sorted by Rank </h3> 
+
+    <div id = "table"> 
+        <MaterialTable />
+    </div> 
+    </div>);
 }
 
 export default Players; 

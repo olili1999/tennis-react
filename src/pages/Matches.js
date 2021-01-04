@@ -5,9 +5,7 @@ function Matches() {
   return (<div class = "outer">
 
     <h3> Match List </h3>   
-    <div id = "table"> 
-      <MaterialTable />
-    </div> 
+
      </div>);
 
 }

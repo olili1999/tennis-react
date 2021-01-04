@@ -1,6 +1,6 @@
 
 import logo from './logo.svg';
-import './App.modules.css';
+import './App.css';
 import Nav from "./Nav" 
 import Card from "./Card"
 import Tournaments from './pages/Tournaments'; 
@@ -48,7 +48,3 @@ const theme = createMuiTheme({
 
 
 export default App;
-// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_table
-// https://ianlunn.github.io/Hover/
-// https://colorhunt.co/palette/196180
-// https://getcssscan.com/css-box-shadow-examples
