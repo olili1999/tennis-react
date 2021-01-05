@@ -8,6 +8,8 @@ import Players from './pages/Players';
 import Login from './pages/Login'; 
 import Matches from './pages/Matches'; 
 import SignUp from './pages/SignUp'; 
+import Profile from './pages/Profile'; 
+
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Home from './pages/Home';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -27,7 +29,8 @@ function App() {
             <Route path = "/Tournaments"> <Tournaments/> </Route> 
             <Route path = "/SignUp"> <SignUp/>  </Route> 
             <Route path = "/Login"> <Login/>  </Route> 
-            <Route path = "/Matches"> <Matches/>  </Route> 
+            <Route path = "/Matches"> <Matches/>  </Route>
+            <Route path = "/Profile"> <Profile/>  </Route>  
           </Switch>
 
 

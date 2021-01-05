@@ -29,8 +29,11 @@ function NavComponent(){
               <li className = "hvr-rectangle-out">
                 <Link to = "/Login">Login</Link></li>
               <li className = "hvr-rectangle-out">
+              <Link to = "/Profile"> Profile </Link></li>
+              <li className = "hvr-rectangle-out">
                 <Link to = "/SignUp"> SIGN UP </Link></li>
-                
+       
+              
             </ul> 
           </div>
       </div> 
