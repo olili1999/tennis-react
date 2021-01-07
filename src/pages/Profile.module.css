@@ -1,6 +1,135 @@
-.dummy_table {
+.outer_container {
+  display: flex;
+  flex-direction: row;
+}
+.left_container {
+  flex-basis: 30%;
+  background-color: #1f4068;
+  display: flex;
+  flex-direction: column;
+}
+
+.mid_container {
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+}
+
+.right_container {
+  background-color: #d1f3e5;
+  flex-basis: 20%;
+}
+.image_cropper {
+  width: 75px;
+  height: 75px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile_pic {
+  display: inline;
+  margin: 0 auto;
+  margin-left: -25%;
+  height: 100%;
+  width: auto;
+  border-radius: 50%;
+}
+
+.profile_container {
+  display: flex;
+}
+
+.profile_img_container {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.profile_right_container {
+  flex-basis: 80%;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+}
+
+.pos_bot {
+  flex-basis: 50%;
+  display: flex;
+  padding-top: 10px;
+  position: relative;
+}
+.pos_top {
+  flex-basis: 50%;
+  position: relative;
+}
+
+.name {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.icon_container {
+  position: absolute;
+  top: 3;
+}
+
+.icon:first-child {
+  margin-right: 5px;
+}
+.icon:not(:first-child) {
+  margin: 0 5px;
+}
+
+.sub_header {
+  color: white;
+  font-size: 1.5em;
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.sub_text {
+  color: white;
+  font-size: 1em;
+  margin: 0 20px 0 20px;
+}
+.text_container {
+  margin: 15px 0px;
+}
+
+* {
+}
+
+.gear_container {
+  max-width: 100%;
+}
+.gear_img_container {
+  display: flex;
+  flex-direction: row;
+}
+.gear_image {
+  flex-basis: 50%;
+  max-width: 100px;
+}
+
+.gear_info_container {
+  display: flex;
+}
+
+.split_container {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+.split_container {
+  flex-basis: 50%;
+  text-align: center;
 }
