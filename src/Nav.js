@@ -26,12 +26,11 @@ function NavComponent(){
                 <Link to = "/Matches"> Match Results </Link></li>
               <li className = "hvr-rectangle-out"> 
                 <Link to = "/Tournaments"> Tournaments</Link></li>
-              <li className = "hvr-rectangle-out">
-                <Link to = "/Login">Login</Link></li>
+    
               <li className = "hvr-rectangle-out">
               <Link to = "/Profile"> Profile </Link></li>
               <li className = "hvr-rectangle-out">
-                <Link to = "/SignUp"> SIGN UP </Link></li>
+                <Link to = "/SignUp"> SIGN IN / UP </Link></li>
        
               
             </ul> 

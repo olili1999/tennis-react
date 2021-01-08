@@ -60,7 +60,7 @@
   flex-basis: 35%;
   display: flex;
   justify-content: flex-end;
-  padding: 4px 10px 4px 0px;
+  margin: 4px 10px 4px 0px;
 }
 
 .score_item {
@@ -71,7 +71,7 @@
 }
 
 .name {
-  padding-left: 20px;
+  margin-left: 20px;
 }
 
 * {

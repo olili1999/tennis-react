@@ -14,6 +14,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Home from './pages/Home';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import FullSignInPage from './pages/FullSignInPage';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
             <Route exact path = "/"> <Home/>   </Route> 
             <Route path = "/Players" > <Players/>  </Route> 
             <Route path = "/Tournaments"> <Tournaments/> </Route> 
-            <Route path = "/SignUp"> <SignUp/>  </Route> 
+            <Route path = "/SignUp"> <FullSignInPage/>  </Route> 
             <Route path = "/Login"> <Login/>  </Route> 
             <Route path = "/Matches"> <Matches/>  </Route>
             <Route path = "/Profile"> <Profile/>  </Route>  

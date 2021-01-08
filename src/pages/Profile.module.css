@@ -71,6 +71,8 @@
 }
 
 .name {
+  font-weight: bold;
+
   position: absolute;
   bottom: 0;
   margin: 0;
@@ -91,6 +93,7 @@
 
 .sub_header {
   color: white;
+  font-weight: bold;
   font-size: 1.5em;
   margin: 0 0 0 20px;
   padding: 0;
