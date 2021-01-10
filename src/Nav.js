@@ -20,18 +20,21 @@ function NavComponent(){
                 <Link to = "/">Home</Link> 
               </li>
               <li className = "hvr-rectangle-out">
-                <Link to = "/Players"> Players</Link>
+                <Link to = "/players"> Players</Link>
               </li> 
               <li className = "hvr-rectangle-out">
-                <Link to = "/Matches"> Match Results </Link></li>
+                <Link to = "/matches"> Match Results </Link></li>
               <li className = "hvr-rectangle-out"> 
-                <Link to = "/Tournaments"> Tournaments</Link></li>
+                <Link to = "/tournaments"> Tournaments</Link></li>
     
               <li className = "hvr-rectangle-out">
-              <Link to = "/Profile"> Profile </Link></li>
+              <Link to = "/profile"> Profile </Link></li>
               <li className = "hvr-rectangle-out">
-                <Link to = "/SignUp"> SIGN IN / UP </Link></li>
-       
+                <Link to = "/login"> Login </Link></li>
+                
+                <li className = "hvr-rectangle-out">
+                <Link to = "/signup"> SIGN UP </Link></li>
+                
               
             </ul> 
           </div>

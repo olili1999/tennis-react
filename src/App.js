@@ -9,13 +9,17 @@ import Login from './pages/Login';
 import Matches from './pages/Matches'; 
 import SignUp from './pages/SignUp'; 
 import Profile from './pages/Profile'; 
-
+import Account from './pages/Account'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import Home from './pages/Home';
+import ForgotPassword from './pages/ForgotPassword';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import FullSignInPage from './pages/FullSignInPage';
+import { AuthProvider } from "./contexts/AuthContext"
 
+import PrivateRoute from "./PrivateRoute"
+import UpdateProfile from "./pages/UpdateProfile"
 function App() {
   return (
     
@@ -24,15 +28,20 @@ function App() {
 
       <Nav></Nav>
       <div className="App">
-          <Switch> 
-            <Route exact path = "/"> <Home/>   </Route> 
-            <Route path = "/Players" > <Players/>  </Route> 
-            <Route path = "/Tournaments"> <Tournaments/> </Route> 
-            <Route path = "/SignUp"> <FullSignInPage/>  </Route> 
-            <Route path = "/Login"> <Login/>  </Route> 
-            <Route path = "/Matches"> <Matches/>  </Route>
-            <Route path = "/Profile"> <Profile/>  </Route>  
+        <AuthProvider> 
+          <Switch>
+            
+            <PrivateRoute exact path = "/"> <Home/>   </PrivateRoute> 
+            <Route exact path = "/signup"> <SignUp/>   </Route> 
+            <Route exact path = "/login"> <Login/>   </Route> 
+            <Route exact path = "/forgotpassword"> <ForgotPassword/>   </Route> 
+            <PrivateRoute component = {Account} exact path = "/account"/>  
+            <Route path = "/players" > <Players/>  </Route> 
+            <Route path = "/tournaments"> <Tournaments/> </Route> 
+            <Route path = "/matches"> <Matches/>  </Route>
+            <Route path = "/profile"> <Profile/>  </Route>  
           </Switch>
+        </AuthProvider> 
 
 
       </div>
