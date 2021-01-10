@@ -15,13 +15,12 @@ function Login(props) {
   async function handleSubmit(e) {
     e.preventDefault(); 
 
-
     try{ 
       setError('')
       setLoading(true); 
       // wait for the signup to finish 
       await login(emailRef.current.value, passwordRef.current.value); 
-      history.push('/account')
+      history.push('/account'); 
     }
     catch { 
       setError('Failed to log in')

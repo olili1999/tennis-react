@@ -2,12 +2,12 @@ import React, {useState, useRef} from 'react';
 import styles from './Account.module.css'; 
 
 import {useAuth} from '../contexts/AuthContext'; 
+import {useHistory} from "react-router-dom";
+import firebase from "../firebase"; 
 
-import {Link, useHistory} from "react-router-dom";
+
 
 export default function Account() {
-
-  const emailRef = useRef(); 
 
   const [error, setError] = useState(''); 
   const {currentUser, logout} = useAuth(); 
@@ -31,8 +31,8 @@ export default function Account() {
 
   return (
     <div>
-
-        <h2 className = {styles.header_text}> Oliver Li </h2> 
+        {JSON.stringify(currentUser)} 
+        <h2 className = {styles.header_text}> {currentUser.displayName} </h2> 
         {error && <p style = {{fontWeight: 'bold', color: '#cc0000', textAlign: 'center', padding: 0, margin: '20px 0 0 20px'}}> {error} </p>}
         <strong> E-mail: </strong> {currentUser.email} 
       
