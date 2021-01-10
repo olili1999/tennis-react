@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react'; 
 import styles from './Account.module.css'; 
-
+import {db} from "../firebase"
 import {useAuth} from '../contexts/AuthContext'; 
 import {useHistory} from "react-router-dom";
 import firebase from "../firebase"; 
@@ -12,7 +12,7 @@ export default function Account() {
   const [error, setError] = useState(''); 
   const {currentUser, logout} = useAuth(); 
   const history = useHistory(); 
-
+  const [userName, setUserName] = useState('');  
 
   async function handleLogout(){ 
     setError(''); 
@@ -26,13 +26,14 @@ export default function Account() {
 
 
   }
-
-
+  
+  db.ref('/users/' + currentUser.uid).once('value').then((snapshot) => {
+    setUserName(snapshot.val().userName);
+  });
 
   return (
     <div>
-        {JSON.stringify(currentUser)} 
-        <h2 className = {styles.header_text}> {currentUser.displayName} </h2> 
+        <h2 className = {styles.header_text}> {userName} </h2> 
         {error && <p style = {{fontWeight: 'bold', color: '#cc0000', textAlign: 'center', padding: 0, margin: '20px 0 0 20px'}}> {error} </p>}
         <strong> E-mail: </strong> {currentUser.email} 
       

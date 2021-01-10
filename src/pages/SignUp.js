@@ -30,7 +30,7 @@ export default function SignUp(props) {
       // wait for the signup to finish 
       let userObj = await signup(emailRef.current.value, passwordRef.current.value); 
       db.ref('users/' + userObj['user']['uid']).set({
-        userName: fullNameRef.current.value 
+        userName: fullNameRef.current.value
       }); 
       history.push("/login"); 
     }
