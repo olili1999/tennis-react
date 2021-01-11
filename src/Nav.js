@@ -7,8 +7,12 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp'; 
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'; 
 import {NavLink} from 'react-router-dom'; 
+import {useAuth} from './contexts/AuthContext';
 
 function NavComponent(){ 
+
+  const {currentUser} = useAuth(); 
+
   return (
       <div class = "outer">
           <div className="nav-bar">
@@ -26,11 +30,12 @@ function NavComponent(){
                 <Link to = "/matches"> Match Results </Link></li>
               <li className = "hvr-rectangle-out"> 
                 <Link to = "/tournaments"> Tournaments</Link></li>
-    
               <li className = "hvr-rectangle-out">
               <Link to = "/profile"> Profile </Link></li>
               <li className = "hvr-rectangle-out">
                 <Link to = "/login"> Login </Link></li>
+              {/* {currentUser ? "": (<li className = "hvr-rectangle-out">
+                <Link to = "/login"> Login </Link></li>)} */}
                 
                 <li className = "hvr-rectangle-out">
                 <Link to = "/signup"> SIGN UP </Link></li>

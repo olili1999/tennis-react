@@ -17,14 +17,17 @@ export default function Account() {
   async function handleLogout(){ 
     setError(''); 
     try{ 
+      localStorage.removeItem('isLoggedIn');
+
       await logout(); 
-      history.push('/loginandsignup'); 
+      if (!currentUser){ 
+        history.push('/loginandsignup');
+      }  
+
     }
     catch { 
       setError('Failed to log out')
     }
-
-
   }
   
   db.ref('/users/' + currentUser.uid).once('value').then((snapshot) => {
@@ -33,6 +36,8 @@ export default function Account() {
 
   return (
     <div>
+        {JSON.stringify(currentUser)}
+
         <h2 className = {styles.header_text}> {userName} </h2> 
         {error && <p style = {{fontWeight: 'bold', color: '#cc0000', textAlign: 'center', padding: 0, margin: '20px 0 0 20px'}}> {error} </p>}
         <strong> E-mail: </strong> {currentUser.email} 

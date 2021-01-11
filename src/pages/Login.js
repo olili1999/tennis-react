@@ -20,6 +20,7 @@ function Login(props) {
       setLoading(true); 
       // wait for the signup to finish 
       await login(emailRef.current.value, passwordRef.current.value); 
+      localStorage.setItem("isLoggedIn", true)
       history.push('/account'); 
     }
     catch { 
