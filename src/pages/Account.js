@@ -10,9 +10,10 @@ import firebase from "../firebase";
 export default function Account() {
 
   const [error, setError] = useState(''); 
-  const {currentUser, logout} = useAuth(); 
+  const {logout} = useAuth(); 
   const history = useHistory(); 
   const [userName, setUserName] = useState('');  
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser'))); 
 
   async function handleLogout(){ 
     setError(''); 

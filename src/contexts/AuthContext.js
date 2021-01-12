@@ -22,7 +22,9 @@ export function AuthProvider({children}) {
     return auth.signInWithEmailAndPassword(email, password); 
   }
 
+  // https://stackoverflow.com/questions/48855851/how-do-i-keep-a-user-logged-into-firebase-after-refresh-in-react-js
   function logout() { 
+    localStorage.removeItem('currentUser'); 
     return auth.signOut(); 
   }
 
@@ -33,10 +35,12 @@ export function AuthProvider({children}) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user =>{ 
-      if(user){
+      if(user){ 
         setCurrentUser(user); 
-      }
-      else{
+        localStorage.setItem('currentUser', JSON.stringify(user)); 
+      } 
+      else{ 
+        localStorage.removeItem('currentUser'); 
       }
       
     })
