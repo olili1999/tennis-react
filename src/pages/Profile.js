@@ -5,13 +5,22 @@ import styles from "./Profile.module.css";
 import { FaFacebook, FaRegEnvelope, FaInstagram, FaPhoneVolume} from "react-icons/fa";
 import Loading from '../Loading'; 
 
+
+
 function Profile() { 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000)
-  }, [])
+    let isSubscribed = true;
+    setTimeout(() => {
+      if(isSubscribed){ 
+        setLoading(false)
+      }}, 1000); 
 
+    return() => isSubscribed = false; 
+    
+
+  }, [])
   return (
   <> 
     {loading === false ? (

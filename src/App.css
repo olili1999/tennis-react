@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Rubik");
 html,
 body {
-  height: 100%;
-  margin: 0;
 }
-#root {
-  height: 100%;
+
+.App {
+  min-height: 100%;
 }
 
 body {

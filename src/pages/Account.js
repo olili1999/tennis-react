@@ -1,54 +1,77 @@
-import React, {useState, useRef} from 'react'; 
-import styles from './Account.module.css'; 
-import {db} from "../firebase"
-import {useAuth} from '../contexts/AuthContext'; 
-import {useHistory} from "react-router-dom";
-import firebase from "../firebase"; 
-
-
+import React, { useState, useEffect } from "react";
+import styles from "./Account.module.css";
+import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function Account() {
+  const [error, setError] = useState("");
+  const { logout } = useAuth();
+  const history = useHistory();
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))["uid"]
+  );
 
-  const [error, setError] = useState(''); 
-  const {logout} = useAuth(); 
-  const history = useHistory(); 
-  const [userName, setUserName] = useState('');  
-  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('currentUser'))); 
+  async function handleLogout() {
+    setError("");
+    try {
+      localStorage.removeItem("isLoggedIn");
 
-  async function handleLogout(){ 
-    setError(''); 
-    try{ 
-      localStorage.removeItem('isLoggedIn');
-
-      await logout(); 
-      if (!currentUser){ 
-        history.push('/loginandsignup');
-      }  
-
-    }
-    catch { 
-      setError('Failed to log out')
+      await logout();
+      if (!currentUser) {
+        history.push("/loginandsignup");
+      }
+    } catch {
+      setError("Failed to log out");
     }
   }
-  
-  db.ref('/users/' + currentUser.uid).once('value').then((snapshot) => {
-    setUserName(snapshot.val().userName);
-  });
+
+  db.collection("users")
+    .doc(currentUser)
+    .get()
+    .then((documentSnapshot) => {
+      setUserName(documentSnapshot.data().full_name);
+    });
+  db.collection("users")
+    .doc(currentUser)
+    .get()
+    .then((documentSnapshot) => {
+      setEmail(documentSnapshot.data().email);
+    });
 
   return (
     <div>
-        {JSON.stringify(currentUser)}
-
-        <h2 className = {styles.header_text}> {userName} </h2> 
-        {error && <p style = {{fontWeight: 'bold', color: '#cc0000', textAlign: 'center', padding: 0, margin: '20px 0 0 20px'}}> {error} </p>}
-        <strong> E-mail: </strong> {currentUser.email} 
-      
-        <form onSubmit = {handleLogout}  className = {styles.form}>
-          <div className = {styles.signup_button_div}> 
-            <input className = {styles.signup_button} type="submit" value = "Log Out" id="updateprofile" name="updateprofile"/> <br/>
-          </div>
-        </form>
-       
+      {`User ID: ${JSON.stringify(currentUser)}`}
+      <h2 className={styles.header_text}> {userName} </h2>
+      {error && (
+        <p
+          style={{
+            fontWeight: "bold",
+            color: "#cc0000",
+            textAlign: "center",
+            padding: 0,
+            margin: "20px 0 0 20px",
+          }}
+        >
+          {" "}
+          {error}{" "}
+        </p>
+      )}
+      <strong> E-mail: </strong> {email}
+      <form onSubmit={handleLogout} className={styles.form}>
+        <div className={styles.signup_button_div}>
+          <input
+            className={styles.signup_button}
+            type="submit"
+            value="Log Out"
+            id="updateprofile"
+            name="updateprofile"
+          />{" "}
+          <br />
+        </div>
+      </form>
     </div>
-  )
+  );
 }
