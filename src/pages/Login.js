@@ -24,6 +24,8 @@ function Login(props) {
         passwordRef.current.value
       );
       setLogged(true);
+      localStorage.setItem("isLoggedIn", true);
+
       history.push("/account");
     } catch {
       setError("Failed to log in");

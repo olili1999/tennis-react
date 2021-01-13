@@ -23,15 +23,15 @@ export default function Account() {
     const storageRef = app.storage().ref();
     const fileRef = storageRef.child(file.name);
     await fileRef.put(file);
-    const fileURL = fileRef.getDownloadURL();
     setFileURL(await fileRef.getDownloadURL());
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     db.collection("users")
-      .doc(currentUser)
+      .doc(currentUser["uid"])
       .update({ "profile.profile_pic": fileURL });
+    fetchData();
   };
 
   async function handleLogout() {
@@ -47,7 +47,8 @@ export default function Account() {
       setError("Failed to log out");
     }
   }
-  if (currentUser) {
+
+  async function fetchData() {
     db.collection("users")
       .doc(currentUser["uid"])
       .get()
@@ -68,18 +69,9 @@ export default function Account() {
       });
   }
 
-  // db.collection("users")
-  //   .doc(currentUser)
-  //   .get()
-  //   .then((documentSnapshot) => {
-  //     setUserName(documentSnapshot.data().full_name);
-  //   });
-  // db.collection("users")
-  //   .doc(currentUser)
-  //   .get()
-  //   .then((documentSnapshot) => {
-  //     setEmail(documentSnapshot.data().email);
-  //   });
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -108,9 +100,6 @@ export default function Account() {
         <input type="text" name="userName" placeholder="NAME" />
         <button> Submit </button>
       </form>
-      <ul>
-        <li> </li>
-      </ul>
       {/* onSubmit={handleLogout} */}
       <form onSubmit={handleLogout} className={styles.form}>
         <div className={styles.signup_button_div}>
