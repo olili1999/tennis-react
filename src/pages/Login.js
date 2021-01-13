@@ -1,17 +1,17 @@
 import styles from "./Login.module.css";
-import React, { useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory, Link } from "react-router-dom";
+import { LoggedContext } from "../contexts/LoggedContext";
 
 function Login(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
-  // const {signup, currentUser} = useAuth();
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
+  const { logged, setLogged } = useContext(LoggedContext);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -23,7 +23,7 @@ function Login(props) {
         emailRef.current.value,
         passwordRef.current.value
       );
-      localStorage.setItem("isLoggedIn", true);
+      setLogged(true);
       history.push("/account");
     } catch {
       setError("Failed to log in");

@@ -26,54 +26,59 @@ import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import UpdateProfile from "./pages/UpdateProfile";
 import Test from "./Test";
+import { LoggedContext } from "./contexts/LoggedContext";
+import React, { useState } from "react";
 
 function App() {
+  const [logged, setLogged] = useState(null);
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <Nav></Nav>
-          <div className="App">
-            <Switch>
-              <PrivateRoute exact path="/">
-                {" "}
-                <Home />{" "}
-              </PrivateRoute>
-              <Route exact path="/signup">
-                {" "}
-                <SignUp />{" "}
-              </Route>
-              <Route exact path="/login">
-                {" "}
-                <Login />{" "}
-              </Route>
-              <Route exact path="/forgotpassword">
-                {" "}
-                <ForgotPassword />{" "}
-              </Route>
-              <PrivateRoute component={Account} exact path="/account" />
-              <Route path="/players">
-                {" "}
-                <Players />{" "}
-              </Route>
-              <Route path="/tournaments">
-                {" "}
-                <Tournaments />{" "}
-              </Route>
-              <Route path="/matches">
-                {" "}
-                <Matches />{" "}
-              </Route>
-              <Route path="/profile">
-                {" "}
-                <Profile />{" "}
-              </Route>
-              <Route path="/test/:userID">
-                {" "}
-                <Test />{" "}
-              </Route>
-            </Switch>
-          </div>
+          <LoggedContext.Provider value={{ logged, setLogged }}>
+            <Nav></Nav>
+            <div className="App">
+              <Switch>
+                <PrivateRoute exact path="/">
+                  {" "}
+                  <Home />{" "}
+                </PrivateRoute>
+                <Route exact path="/signup">
+                  {" "}
+                  <SignUp />{" "}
+                </Route>
+                <Route exact path="/login">
+                  {" "}
+                  <Login />{" "}
+                </Route>
+                <Route exact path="/forgotpassword">
+                  {" "}
+                  <ForgotPassword />{" "}
+                </Route>
+                <PrivateRoute component={Account} exact path="/account" />
+                <Route path="/players">
+                  {" "}
+                  <Players />{" "}
+                </Route>
+                <Route path="/tournaments">
+                  {" "}
+                  <Tournaments />{" "}
+                </Route>
+                <Route path="/matches">
+                  {" "}
+                  <Matches />{" "}
+                </Route>
+                <Route path="/profile">
+                  {" "}
+                  <Profile />{" "}
+                </Route>
+                <Route path="/test/:userID">
+                  {" "}
+                  <Test />{" "}
+                </Route>
+              </Switch>
+            </div>
+          </LoggedContext.Provider>
         </AuthProvider>
       </ThemeProvider>
     </Router>
