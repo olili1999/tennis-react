@@ -56,7 +56,13 @@ function Login(props) {
             <div className={styles.text_div}>
               <label htmlFor="email">E-mail</label>
               <br />
-              <input ref={emailRef} type="text" id="email" name="email" />{" "}
+              <input
+                ref={emailRef}
+                className={styles.text_type}
+                type="text"
+                id="email"
+                name="email"
+              />{" "}
               <br />
             </div>
             <div className={styles.text_div}>
@@ -67,6 +73,7 @@ function Login(props) {
                 type="password"
                 id="password"
                 name="password"
+                className={styles.text_type}
               />
               <br />
             </div>

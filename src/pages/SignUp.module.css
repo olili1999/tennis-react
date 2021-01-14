@@ -57,7 +57,7 @@
   flex-direction: column;
 }
 
-input[type~="text"] {
+.text_type {
   width: 90%;
   height: 35px;
   border-radius: 5px;
@@ -66,15 +66,7 @@ input[type~="text"] {
   font-family: Rubik, sans-serif;
   font-size: 1rem;
 }
-input[type~="password"] {
-  font-size: 1rem;
-  height: 35px;
-  width: 90%;
-  border-radius: 5px;
-  border: 1.5px solid black;
-  outline: none;
-  font-family: Rubik, sans-serif;
-}
+
 .text_div {
   margin: 30px 60px 0px 60px;
 }

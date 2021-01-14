@@ -94,19 +94,27 @@ export default function SignUp() {
                 type="text"
                 id="fullname"
                 name="fullname"
+                className={styles.text_type}
               />
               <br />
             </div>
             <div className={styles.text_div}>
               <label htmlFor="email">E-mail</label>
               <br />
-              <input ref={emailRef} type="text" id="email" name="email" />{" "}
+              <input
+                ref={emailRef}
+                className={styles.text_type}
+                type="text"
+                id="email"
+                name="email"
+              />{" "}
               <br />
             </div>
             <div className={styles.text_div}>
               <label htmlFor="password">Password</label>
               <br />
               <input
+                className={styles.text_type}
                 ref={passwordRef}
                 type="password"
                 id="password"
@@ -118,6 +126,7 @@ export default function SignUp() {
               <label htmlFor="password">Password Confirmation</label>
               <br />
               <input
+                className={styles.text_type}
                 ref={passwordConfirmRef}
                 type="password"
                 id="password_confirmation"

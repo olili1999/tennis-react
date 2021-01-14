@@ -11,6 +11,9 @@ import { useAuth } from "./contexts/AuthContext";
 import { LoggedContext } from "./contexts/LoggedContext";
 function NavComponent() {
   const { logged, setLogged } = useContext(LoggedContext);
+  const [isLogged, setIsLogged] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn"))
+  );
 
   return (
     <div className="nav-bar">
@@ -35,21 +38,21 @@ function NavComponent() {
           <Link to="/tournaments"> Tournaments</Link>
         </li>
 
-        {logged ? (
+        {logged || isLogged ? (
           <li className="hvr-rectangle-out">
             <Link to="/profile"> Profile </Link>
           </li>
         ) : (
           ""
         )}
-        {logged ? (
+        {logged || isLogged ? (
           <li className="hvr-rectangle-out">
             <Link to="/account"> Account </Link>
           </li>
         ) : (
           ""
         )}
-        {logged ? (
+        {logged || isLogged ? (
           ""
         ) : (
           <li className="hvr-rectangle-out">
@@ -57,7 +60,7 @@ function NavComponent() {
           </li>
         )}
 
-        {logged ? (
+        {logged || isLogged ? (
           ""
         ) : (
           <li className="hvr-rectangle-out">
