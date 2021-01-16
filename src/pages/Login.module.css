@@ -83,6 +83,10 @@ input[type~="password"] {
   font-weight: 600;
 }
 
+.login_button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 .login_button {
   width: 45%;
   outline: none;

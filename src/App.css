@@ -46,6 +46,8 @@ body::-webkit-scrollbar-thumb {
  Blue Color: #1f4068
  Green Color: #206a5d
  Mint Color: #D1F3E5
+ Box Shadow: box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
  https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_filter_table
  https://ianlunn.github.io/Hover/
  https://colorhunt.co/palette/196180

@@ -9,6 +9,7 @@ export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const fullNameRef = useRef();
+  const usernameRef = useRef();
 
   const passwordConfirmRef = useRef();
   // const {signup, currentUser} = useAuth();
@@ -16,6 +17,7 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [userNameError, setUserNameError] = useState(false);
 
   // const ref = db.collection("users");
   // ref.get()
@@ -36,6 +38,22 @@ export default function SignUp() {
   //   phone_num: "",
   // });
 
+  async function checkUsernameValidity() {
+    try {
+      const userDbRef = db
+        .collection("usernames")
+        .doc(usernameRef.current.value);
+      const doc = await userDbRef.get();
+      if (!doc.exists) {
+        setUserNameError(false);
+      } else {
+        setUserNameError(true);
+      }
+    } catch {
+      console.log("error");
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -55,16 +73,24 @@ export default function SignUp() {
           age: "",
           full_name: fullNameRef.current.value,
           email: emailRef.current.value,
+          username: usernameRef.current.value,
+          USTA: "",
+          UTR: "",
+          instagram: "",
+          facebook: "",
           phone_num: "",
           profile: { profile_pic: "", profile_bio: "", profile_racket: "" },
         });
+      db.collection("usernames").doc(usernameRef.current.value).set({
+        uid: userObj["user"]["uid"],
+      });
       history.push("/login");
     } catch {
       setError("Failed to create an account");
       setLoading(false);
     }
   }
-
+  console.log(userNameError);
   return (
     <>
       <div className={styles.justifycenter}>
@@ -81,8 +107,21 @@ export default function SignUp() {
                 margin: "20px 0 0 20px",
               }}
             >
-              {" "}
               {error}{" "}
+            </p>
+          )}
+
+          {userNameError && (
+            <p
+              style={{
+                fontWeight: "bold",
+                color: "#cc0000",
+                textAlign: "center",
+                padding: 0,
+                margin: "20px 0 0 20px",
+              }}
+            >
+              Username Taken
             </p>
           )}
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -107,6 +146,19 @@ export default function SignUp() {
                 type="text"
                 id="email"
                 name="email"
+              />{" "}
+              <br />
+            </div>
+            <div className={styles.text_div}>
+              <label htmlFor="username">Username</label>
+              <br />
+              <input
+                onChange={checkUsernameValidity}
+                ref={usernameRef}
+                className={styles.text_type}
+                type="text"
+                id="username"
+                name="username"
               />{" "}
               <br />
             </div>
@@ -137,7 +189,7 @@ export default function SignUp() {
 
             <div className={styles.signup_button_div}>
               <input
-                disabled={loading}
+                disabled={loading || userNameError}
                 className={styles.signup_button}
                 type="submit"
                 value="Sign Up"

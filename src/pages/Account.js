@@ -4,7 +4,7 @@ import app, { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { LoggedContext } from "../contexts/LoggedContext";
-
+import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 
 export default function Account() {
@@ -17,6 +17,9 @@ export default function Account() {
   const [fileURL, setFileURL] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const bioRef = useRef();
+  const instaRef = useRef();
+  const fbRef = useRef();
+  const phoneRef = useRef();
 
   const [USTA, setUSTA] = useState("1.0");
   const [UTR, setUTR] = useState("1.0");
@@ -27,6 +30,9 @@ export default function Account() {
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
     const storageRef = app.storage().ref();
     const fileRef = storageRef.child(file.name);
     await fileRef.put(file);
@@ -43,14 +49,38 @@ export default function Account() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    db.collection("users").doc(currentUser["uid"]).update({ UTR: UTR });
-    db.collection("users").doc(currentUser["uid"]).update({ USTA: USTA });
-    db.collection("users")
-      .doc(currentUser["uid"])
-      .update({ "profile.profile_pic": fileURL });
-    db.collection("users")
-      .doc(currentUser["uid"])
-      .update({ "profile.profile_bio": bioRef.current.value });
+    if (fbRef.current.value !== "") {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .update({ facebook: fbRef.current.value });
+    }
+    if (instaRef.current.value !== "") {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .update({ instagram: instaRef.current.value });
+    }
+    if (phoneRef.current.value !== "") {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .update({ phone_num: phoneRef.current.value });
+    }
+    if (UTR !== "") {
+      db.collection("users").doc(currentUser["uid"]).update({ UTR: UTR });
+    }
+    if (USTA !== "") {
+      db.collection("users").doc(currentUser["uid"]).update({ USTA: USTA });
+    }
+    if (fileURL !== null) {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .update({ "profile.profile_pic": fileURL });
+    }
+    if (bioRef.current.value !== "") {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .update({ "profile.profile_bio": bioRef.current.value });
+    }
+
     fetchData();
   };
 
@@ -94,17 +124,21 @@ export default function Account() {
 
   return (
     <div className={styles.outer_div}>
-      <Avatar
-        src={avatar}
-        style={{
-          backgroundColor: "#206a5d",
-          fontSize: "50px",
-          height: "100px",
-          width: "100px",
-        }}
-      >
-        {fullname.charAt(0)}
-      </Avatar>
+      <Link style={{ textDecoration: "none" }} to="/profile">
+        <Avatar
+          src={avatar}
+          variant="circular"
+          className={styles.hover}
+          style={{
+            backgroundColor: "#206a5d",
+            fontSize: "50px",
+            height: "100px",
+            width: "100px",
+          }}
+        >
+          {fullname.charAt(0)}
+        </Avatar>
+      </Link>
       <h2 className={styles.header_text}> {fullname} </h2>
       {error && (
         <p
@@ -121,16 +155,39 @@ export default function Account() {
         </p>
       )}
       <strong> E-mail: </strong> {email}
-      {/* onSubmit={onSubmit} */}
       <form className={styles.form} onSubmit={onSubmit}>
-        {/* onChange={onFileChange} */}
+        <p className={styles.label}>Link Instagram</p>
+        <input
+          className={styles.input_field}
+          ref={instaRef}
+          name="insta"
+          type="url"
+        />
+        <p className={styles.label}>Link Facebook </p>
+        <input
+          className={styles.input_field}
+          ref={fbRef}
+          name="fb"
+          type="url"
+        />
+        <p className={styles.label}>Add Phone Number </p>
+        <input
+          className={styles.input_field}
+          ref={phoneRef}
+          name="phone"
+          type="tel"
+        />
+
         <p className={styles.label}>Change your profile picture</p>
         <input name="file-upload" onChange={onFileChange} type="file" />
         <p className={styles.label}>Change your bio</p>
         <div className={styles.text_area}>
-          <textarea ref={bioRef} rows="10">
-            Type your bio here...
-          </textarea>
+          <textarea
+            className={styles.input_field}
+            placeholder="Type your bio here..."
+            ref={bioRef}
+            rows="10"
+          ></textarea>
         </div>
         <p className={styles.label}>Change your UTR rating</p>
         <select value={UTR} onChange={UTRChange} name="ustarank" id="ustarank">
@@ -179,9 +236,7 @@ export default function Account() {
           />
         </div>
       </form>
-      {/* onSubmit={handleLogout} */}
       <button className={styles.button} onClick={handleLogout}>
-        {" "}
         Logout
       </button>
     </div>

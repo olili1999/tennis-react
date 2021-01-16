@@ -76,6 +76,11 @@
   font-weight: 600;
 }
 
+.signup_button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 .signup_button {
   width: 45%;
   outline: none;

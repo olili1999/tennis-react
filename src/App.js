@@ -31,6 +31,7 @@ import React, { useState } from "react";
 
 function App() {
   const [logged, setLogged] = useState(null);
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -68,7 +69,7 @@ function App() {
                   {" "}
                   <Matches />{" "}
                 </Route>
-                <Route path="/profile">
+                <Route path="/profile/:username">
                   {" "}
                   <Profile />{" "}
                 </Route>

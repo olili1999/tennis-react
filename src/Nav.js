@@ -14,7 +14,9 @@ function NavComponent() {
   const [isLogged, setIsLogged] = useState(
     JSON.parse(localStorage.getItem("isLoggedIn"))
   );
-
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
   return (
     <div className="nav-bar">
       <ul className="left">
@@ -40,7 +42,7 @@ function NavComponent() {
 
         {logged || isLogged ? (
           <li className="hvr-rectangle-out">
-            <Link to="/profile"> Profile </Link>
+            <Link to={`/profile/${currentUser["uid"]}`}> Profile </Link>
           </li>
         ) : (
           ""

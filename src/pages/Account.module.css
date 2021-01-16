@@ -17,19 +17,27 @@
   padding: 0;
 }
 
+.hover:hover {
+  opacity: 0.6;
+}
 .outer_div {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 15px;
 }
 
 .label {
   margin: 0;
   padding: 0;
 }
-
+.form > * {
+  margin-bottom: 10px;
+}
+.form {
+  margin-top: 20px;
+}
 select {
   direction: left;
 }
@@ -50,4 +58,13 @@ textarea {
 }
 .text_area {
   width: 450px;
+}
+
+.input_field {
+  font-family: Rubik, sans-serif;
+}
+
+.button:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
