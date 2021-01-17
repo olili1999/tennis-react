@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./Nav.modules.css";
 import { useHistory } from "react-router-dom";
 import Tournaments from "./pages/Tournaments";
@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import { LoggedContext } from "./contexts/LoggedContext";
+
+import { db } from "./firebase";
+
 function NavComponent() {
   const { logged, setLogged } = useContext(LoggedContext);
   const [isLogged, setIsLogged] = useState(
@@ -17,6 +20,17 @@ function NavComponent() {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser"))
   );
+  const [currentUserName, setCurrentUserName] = useState("");
+
+  useEffect(() => {
+    db.collection("users")
+      .doc(currentUser["uid"])
+      .get()
+      .then((documentSnapshot) => {
+        setCurrentUserName(documentSnapshot.data().username);
+      });
+  }, []);
+
   return (
     <div className="nav-bar">
       <ul className="left">
@@ -42,7 +56,8 @@ function NavComponent() {
 
         {logged || isLogged ? (
           <li className="hvr-rectangle-out">
-            <Link to={`/profile/${currentUser["uid"]}`}> Profile </Link>
+            {/*  */}
+            <Link to={`/profile/${currentUserName}`}> Profile </Link>
           </li>
         ) : (
           ""

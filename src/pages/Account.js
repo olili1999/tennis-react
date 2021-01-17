@@ -20,6 +20,7 @@ export default function Account() {
   const instaRef = useRef();
   const fbRef = useRef();
   const phoneRef = useRef();
+  const [currentUserName, setCurrentUserName] = useState("");
 
   const [USTA, setUSTA] = useState("1.0");
   const [UTR, setUTR] = useState("1.0");
@@ -116,15 +117,35 @@ export default function Account() {
       .then((documentSnapshot) => {
         setAvatar(documentSnapshot.data().profile.profile_pic);
       });
+    db.collection("users")
+      .doc(currentUser["uid"])
+      .get()
+      .then((documentSnapshot) => {
+        setCurrentUserName(documentSnapshot.data().username);
+      });
   }
 
   useEffect(() => {
+    if (currentUser) {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .get()
+        .then((documentSnapshot) => {
+          localStorage.setItem(
+            "currentUserName",
+            documentSnapshot.data().user_name
+          );
+        });
+    }
     fetchData();
   }, []);
 
   return (
     <div className={styles.outer_div}>
-      <Link style={{ textDecoration: "none" }} to="/profile">
+      <Link
+        style={{ textDecoration: "none" }}
+        to={`/profile/${currentUserName}`}
+      >
         <Avatar
           src={avatar}
           variant="circular"
@@ -154,6 +175,7 @@ export default function Account() {
           {error}{" "}
         </p>
       )}
+      <strong> Username: </strong> {currentUserName}
       <strong> E-mail: </strong> {email}
       <form className={styles.form} onSubmit={onSubmit}>
         <p className={styles.label}>Link Instagram</p>
@@ -177,18 +199,15 @@ export default function Account() {
           name="phone"
           type="tel"
         />
-
         <p className={styles.label}>Change your profile picture</p>
         <input name="file-upload" onChange={onFileChange} type="file" />
         <p className={styles.label}>Change your bio</p>
-        <div className={styles.text_area}>
-          <textarea
-            className={styles.input_field}
-            placeholder="Type your bio here..."
-            ref={bioRef}
-            rows="10"
-          ></textarea>
-        </div>
+        <textarea
+          className={styles.input_field}
+          placeholder="Type your bio here..."
+          ref={bioRef}
+          rows="10"
+        ></textarea>
         <p className={styles.label}>Change your UTR rating</p>
         <select value={UTR} onChange={UTRChange} name="ustarank" id="ustarank">
           <option value="1.0">1.0</option>

@@ -53,15 +53,11 @@ select {
   word-break: break-word;
 }
 
-textarea {
-  width: 100%;
-}
-.text_area {
-  width: 450px;
-}
-
 .input_field {
   font-family: Rubik, sans-serif;
+  border-radius: 2px;
+  border: 1.5px solid black;
+  width: 375px;
 }
 
 .button:hover {
