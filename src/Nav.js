@@ -22,14 +22,16 @@ function NavComponent() {
   );
   const [currentUserName, setCurrentUserName] = useState("");
 
-  useEffect(() => {
+  if (currentUser !== null) {
     db.collection("users")
       .doc(currentUser["uid"])
       .get()
       .then((documentSnapshot) => {
         setCurrentUserName(documentSnapshot.data().username);
       });
-  }, []);
+  }
+
+  console.log(currentUserName);
 
   return (
     <div className="nav-bar">

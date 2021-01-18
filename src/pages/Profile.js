@@ -10,11 +10,68 @@ import {
 } from "react-icons/fa";
 import Loading from "../Loading";
 import { useParams } from "react-router-dom";
+import { db } from "../firebase";
+import Avatar from "@material-ui/core/Avatar";
 
 function Profile() {
   const { userID } = useParams();
 
   const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser"))
+  );
+  const [bio, setBio] = useState("");
+  const [USTA, setUSTA] = useState("");
+  const [UTR, setUTR] = useState("");
+  const [email, setEmail] = useState("");
+  const [fb, setFB] = useState("");
+  const [insta, setInsta] = useState("");
+
+  const [avatar, setAvatar] = useState("");
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setAvatar(documentSnapshot.data().profile.profile_pic);
+    });
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setFB(documentSnapshot.data().facebook);
+    });
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setInsta(documentSnapshot.data().instagram);
+    });
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setBio(documentSnapshot.data().profile.profile_bio);
+    });
+
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setUSTA(documentSnapshot.data().USTA);
+    });
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setUTR(documentSnapshot.data().UTR);
+    });
+
+  db.collection("users")
+    .doc(currentUser["uid"])
+    .get()
+    .then((documentSnapshot) => {
+      setEmail(documentSnapshot.data().email);
+    });
 
   useEffect(() => {
     let isSubscribed = true;
@@ -33,12 +90,16 @@ function Profile() {
           <div className={styles.left_container}>
             <div className={styles.profile_container}>
               <div className={styles.profile_img_container}>
-                <div className={styles.image_cropper}>
-                  <img
-                    src="./headshotross.jpg"
-                    className={styles.profile_pic}
-                  />
-                </div>
+                <Avatar
+                  src={avatar}
+                  variant="circular"
+                  style={{
+                    backgroundColor: "#206a5d",
+                    fontSize: "50px",
+                    height: "75px",
+                    width: "75px",
+                  }}
+                ></Avatar>
               </div>
               <div className={styles.profile_right_container}>
                 <div className={styles.pos_top}>
@@ -49,43 +110,47 @@ function Profile() {
                 </div>
                 <div className={styles.pos_bot}>
                   <div className={styles.icon_container}>
-                    <FaFacebook
-                      size={25}
-                      className={styles.icon}
-                      style={{ color: "white" }}
-                    />
-                    <FaRegEnvelope
-                      size={25}
-                      className={styles.icon}
-                      style={{ color: "white" }}
-                    />
-                    <FaInstagram
-                      size={25}
-                      className={styles.icon}
-                      style={{ color: "white" }}
-                    />
-                    <FaPhoneVolume
-                      size={25}
-                      className={styles.icon}
-                      style={{ color: "white" }}
-                    />
+                    <a href={fb} target="_blank">
+                      <FaFacebook
+                        size={25}
+                        className={styles.icon}
+                        style={{ color: "white" }}
+                      />
+                    </a>
+                    <a href={insta} target="_blank">
+                      <FaInstagram
+                        size={25}
+                        className={styles.icon}
+                        style={{ color: "white" }}
+                      />
+                    </a>
+                    <a href={`mailto:${email}`} target="_blank">
+                      <FaRegEnvelope
+                        size={25}
+                        className={styles.icon}
+                        style={{ color: "white" }}
+                      />
+                    </a>
+                    <a href="">
+                      <FaPhoneVolume
+                        size={25}
+                        className={styles.icon}
+                        style={{ color: "white" }}
+                      />
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
             <div className={styles.text_container}>
               <p className={styles.sub_header}>Bio</p>
-              <p className={styles.sub_text}>
-                Hi, I’m Oliver! I am from Southeastern Michigan and I’ve been
-                playing tennis since I was 6 years old. I also really enjoy
-                teaching so let me know if you would like some lessons :){" "}
-              </p>
+              <p className={styles.sub_text}>{bio}</p>
             </div>
             <div className={styles.text_container}>
               <p className={styles.sub_header}>Stats</p>
               <p className={styles.sub_text}> TwF Rank: #1 </p>
-              <p className={styles.sub_text}> USTA Rating: 5.0 </p>
-              <p className={styles.sub_text}> UTR Rating: 8.0 </p>
+              <p className={styles.sub_text}> USTA Rating: {USTA} </p>
+              <p className={styles.sub_text}> UTR Rating: {UTR} </p>
             </div>
             <div className={styles.text_container}>
               <p className={styles.sub_header}>Current Equipment </p>

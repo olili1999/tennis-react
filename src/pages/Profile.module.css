@@ -30,7 +30,9 @@
   overflow: hidden;
   border-radius: 50%;
 }
-
+.hover:hover {
+  opacity: 0.6;
+}
 .profile_pic {
   display: inline;
   margin: 0 auto;
