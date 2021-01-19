@@ -69,7 +69,7 @@ function App() {
                   {" "}
                   <Matches />{" "}
                 </Route>
-                <Route path="/profile/:username">
+                <Route path="/profile/:user">
                   {" "}
                   <Profile />{" "}
                 </Route>

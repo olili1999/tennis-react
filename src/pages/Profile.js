@@ -14,8 +14,7 @@ import { db } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
 
 function Profile() {
-  const { userID } = useParams();
-
+  const { user } = useParams();
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser"))
@@ -26,52 +25,86 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [fb, setFB] = useState("");
   const [insta, setInsta] = useState("");
-
+  const [phoneNum, setPhoneNum] = useState("");
+  const [fullName, setFullName] = useState("");
   const [avatar, setAvatar] = useState("");
-  db.collection("users")
-    .doc(currentUser["uid"])
+  const [uid, setUID] = useState(null);
+
+  db.collection("usernames")
+    .doc(user)
     .get()
     .then((documentSnapshot) => {
-      setAvatar(documentSnapshot.data().profile.profile_pic);
-    });
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setFB(documentSnapshot.data().facebook);
-    });
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setInsta(documentSnapshot.data().instagram);
-    });
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setBio(documentSnapshot.data().profile.profile_bio);
+      setUID(documentSnapshot.data().uid);
     });
 
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setUSTA(documentSnapshot.data().USTA);
-    });
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setUTR(documentSnapshot.data().UTR);
-    });
+  useEffect(() => {
+    if (uid !== null) {
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setAvatar(documentSnapshot.data().profile.profile_pic);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setFullName(documentSnapshot.data().full_name);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setFB(documentSnapshot.data().facebook);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setInsta(documentSnapshot.data().instagram);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setBio(documentSnapshot.data().profile.profile_bio);
+        });
 
-  db.collection("users")
-    .doc(currentUser["uid"])
-    .get()
-    .then((documentSnapshot) => {
-      setEmail(documentSnapshot.data().email);
-    });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setUSTA(documentSnapshot.data().USTA);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setUTR(documentSnapshot.data().UTR);
+        });
+
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setEmail(documentSnapshot.data().email);
+        });
+      db.collection("users")
+        .doc(uid)
+        .get()
+        .then((documentSnapshot) => {
+          setPhoneNum(documentSnapshot.data().phone_num);
+        });
+    }
+  });
+
+  // console.log(usernameURL);
+  // db.collection("usernames")
+  //   .doc(usernameURL)
+  //   .get()
+  //   .then((documentSnapshot) => {
+  //     setUID(documentSnapshot.data().uid);
+  //   });
 
   useEffect(() => {
     let isSubscribed = true;
@@ -104,8 +137,7 @@ function Profile() {
               <div className={styles.profile_right_container}>
                 <div className={styles.pos_top}>
                   <p className={styles.name} style={{ color: "white" }}>
-                    {" "}
-                    Oliver Li{" "}
+                    {fullName}
                   </p>
                 </div>
                 <div className={styles.pos_bot}>
@@ -131,7 +163,7 @@ function Profile() {
                         style={{ color: "white" }}
                       />
                     </a>
-                    <a href="">
+                    <a href={`tel: ${phoneNum}`} target="_blank">
                       <FaPhoneVolume
                         size={25}
                         className={styles.icon}

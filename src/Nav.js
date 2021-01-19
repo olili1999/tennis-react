@@ -21,17 +21,16 @@ function NavComponent() {
     JSON.parse(localStorage.getItem("currentUser"))
   );
   const [currentUserName, setCurrentUserName] = useState("");
-
-  if (currentUser !== null) {
-    db.collection("users")
-      .doc(currentUser["uid"])
-      .get()
-      .then((documentSnapshot) => {
-        setCurrentUserName(documentSnapshot.data().username);
-      });
-  }
-
-  console.log(currentUserName);
+  useEffect(() => {
+    if (currentUser !== null) {
+      db.collection("users")
+        .doc(currentUser["uid"])
+        .get()
+        .then((documentSnapshot) => {
+          setCurrentUserName(documentSnapshot.data().username);
+        });
+    }
+  });
 
   return (
     <div className="nav-bar">
